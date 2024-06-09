@@ -1,0 +1,2 @@
+# Multiple object detection using pre-trained model in TensorFlow.js
+In this project I used the pre-trained COCO-SSD model to predict common objects on a webcam stream. The purpose of this project is to learn how to run ML models client side.
