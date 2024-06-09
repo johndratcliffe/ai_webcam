@@ -1,3 +1,5 @@
+const video = document.getElementById('webcam')
+const demosSection = document.getElementById('demos')
 const enableWebcamButton = document.getElementById('webcamButton')
 
 // Check if webcam access is supported.
@@ -14,6 +16,32 @@ if (getUserMediaSupported()) {
   console.warn('getUserMedia() is not supported by your browser')
 }
 
-// Placeholder function
+// Enable the live webcam view and start classification.
 function enableCam (event) {
+  // Only continue if the COCO-SSD has finished loading.
+  if (!model) {
+    return
+  }
+
+  // Hide the button once clicked.
+  event.target.classList.add('removed')
+
+  // getUsermedia parameters to force video but not audio.
+  const constraints = {
+    video: true
+  }
+
+  // Activate the webcam stream.
+  navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
+    video.srcObject = stream
+    video.addEventListener('loadeddata', predictWebcam)
+  })
 }
+
+// Placeholder function
+function predictWebcam () {
+}
+
+// Pretend model has loaded to see if webcam will load
+const model = true
+demosSection.classList.remove('invisible')
